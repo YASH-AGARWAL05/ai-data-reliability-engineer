@@ -56,7 +56,7 @@ These are repository and test-collection facts. The commands below reproduce the
 | Sandbox guard/tool tests     |    64 | `.venv/bin/pytest --collect-only -q tests/test_guard_units.py tests/test_investigator_tools.py`     |
 | Graph gate/adversarial tests |   331 | `.venv/bin/pytest --collect-only -q tests/test_graph_adversarial.py tests/test_graph_gate_units.py` |
 
-The last two counts include positive controls as well as escape and adversarial cases. They are suite sizes, not counts of attacks blocked. The coverage value is from the fresh-clone test run; it will change as code and tests change.
+The escape-related selection includes some positive guard checks. These are test-case counts, not counts of attacks blocked. The coverage value is from the fresh-clone test run; it will change as code and tests change.
 
 ## Architecture
 

@@ -15,13 +15,13 @@ A correct diagnosis requires the conclusion label and outcome to match truth, a 
 
 ## Scorer validation
 
-The Python suite contains 18 explicit scenario-seed cases: six scenarios at seeds 7, 8, and 9. Each case scores a hand-built perfect outcome, a lazy guess without evidence, a test edit, and a collateral-change patch, for 72 distinct scored states. Near misses cover wrong causes, unreconciled patches, and a patch on the delayed-refund case. The graph gate and adversarial suites collect 331 tests; the sandbox guard and tool suites collect 64. Both totals include positive controls as well as rejection cases.
+The Python suite contains 18 explicit scenario-seed cases: six scenarios at seeds 7, 8, and 9. Each case scores a hand-built perfect outcome, a lazy guess without evidence, a test edit, and a collateral-change patch, for 72 distinct scored states. Near misses cover wrong causes, unreconciled patches, and a patch on the delayed-refund case. The adversarial graph rejection selector collects 165 cases. The escape-related guard selector collects 54 cases and includes positive guard checks. The full graph gate and adversarial suites collect 331 tests; the full sandbox guard and tool suites collect 64.
 
 ```sh
 .venv/bin/pytest --collect-only -q tests/test_evaluation.py -k perfect_lazy_and_sabotage_outcomes
 .venv/bin/pytest --collect-only -q tests/test_scorer_near_misses.py
-.venv/bin/pytest --collect-only -q tests/test_graph_adversarial.py tests/test_graph_gate_units.py
-.venv/bin/pytest --collect-only -q tests/test_guard_units.py tests/test_investigator_tools.py
+.venv/bin/pytest --collect-only -q tests/test_graph_adversarial.py -k test_adversarial_graph_rejects
+.venv/bin/pytest --collect-only -q tests/test_guard_units.py tests/test_investigator_tools.py -k "reject or confine or protected or timeout or symlink or mount or read_only_sql"
 ```
 
 Run the scripted evaluation with:
