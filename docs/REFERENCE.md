@@ -43,6 +43,8 @@ The service binds to loopback for local development and has no authentication.
 | POST   | `/investigations/{run_id}/approve`        | Record approval with reason           |
 | POST   | `/investigations/{run_id}/reject`         | Record rejection with reason          |
 
+`IncidentCreate` requires a title of 1 to 200 characters, one of the six scenario names, and a nonnegative seed. `RunCreate` accepts `max_steps` (default 10) and `max_tokens` (default 1000). Approve and reject accept a `ReviewRequest` with a reason of 1 to 2000 characters. Incident routes return `IncidentView`; investigation routes return `RunView`, which includes status, budgets, evidence, tool events, hypotheses, diff, comparison, reasons, and review fields. The catalog route returns pipeline, dataset, model, and test inventory; health returns a status string; evaluations returns saved `EvaluationReport` objects. List routes return arrays and the investigation list accepts an optional `incident_id` query parameter.
+
 ## UI pages
 
 | Route                        | Main content                                                             |

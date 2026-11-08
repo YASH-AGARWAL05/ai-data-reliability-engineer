@@ -49,14 +49,14 @@ These are repository and test-collection facts. The commands below reproduce the
 | Python tests collected       |   483 | `.venv/bin/pytest --collect-only -q tests`                                                          |
 | Browser tests collected      |     9 | `npm run e2e -- --list`                                                                             |
 | Seeded scenarios             |     6 | `find analytics/scenarios -name '*.json'                                                            | wc -l`                                         |
-| Default evaluation seeds     |     3 | `PYTHONPATH=src .venv/bin/python -m ai_data_reliability.evaluation --help`                          |
+| Default evaluation seeds     |     3 | `rg "default=\[7, 8, 9\]" src/ai_data_reliability/evaluation/__main__.py`                           |
 | Investigator tool methods    |    10 | `rg '^ def (create_sandbox                                                                          | read_model_code                                | get_lineage | get_recent_changes | apply_patch_in_sandbox | run_sql | list_tables | describe_table | run_dbt_tests | compare_metrics)' src/ai_data_reliability/investigator/sandbox.py` |
 | HTTP endpoints               |    13 | `rg '@app\.(get                                                                                     | post)' src/ai_data_reliability/service/api.py` |
 | UI pages                     |     4 | `find web/app -name page.tsx`                                                                       |
 | Sandbox guard/tool tests     |    64 | `.venv/bin/pytest --collect-only -q tests/test_guard_units.py tests/test_investigator_tools.py`     |
 | Graph gate/adversarial tests |   331 | `.venv/bin/pytest --collect-only -q tests/test_graph_adversarial.py tests/test_graph_gate_units.py` |
 
-The last two counts include positive controls as well as escape and adversarial cases. They are suite sizes, not counts of attacks blocked. Test coverage is reported by `make test` rather than fixed in this table.
+The last two counts include positive controls as well as escape and adversarial cases. They are suite sizes, not counts of attacks blocked. The coverage value is from the fresh-clone test run; it will change as code and tests change.
 
 ## Architecture
 
@@ -144,19 +144,21 @@ Each scenario starts from the same dbt template and changes a known piece of sou
 
 The clean control is deliberately an incident with no injected defect. The delayed-refund case has a real data condition but does not call for a model patch. These cases test whether the system can represent a verified no-change outcome.
 
+Seeded fixtures also make failures reproducible. A scenario and seed identify the injected condition, while the evaluator separately records source fingerprints and contract version. That metadata helps distinguish a fixture change from a change in the investigator.
+
 ## Development approach
 
 The project was built in phases: fixture, tool boundary, investigator, service, interface, and evaluation. Strict typing, linting, unit and browser tests, secret scanning, import boundaries, and targeted mutation testing cover different failure modes. The scorer was tested against hand-built outcomes before its reports were used. Each accepted code patch is checked against independent metrics and unrelated model rows.
 
 ## Engineering quality
 
-Run the full local gate with:
+Run the runner-compatible gate with:
 
 ```sh
-make check
+make lint test security e2e
 ```
 
-It runs lint, type checks, Python and frontend tests, mutation tests, secret scanning, and browser tests. CI runs the checks practical on a GitHub runner and omits the full mutation pass. The [contribution guide](CONTRIBUTING.md) lists focused checks.
+It runs lint, type checks, Python and frontend tests, secret scanning, and browser tests. A longer local mutation pass targets the guard, graph, and scorer; the CI workflow omits it. The [contribution guide](CONTRIBUTING.md) lists focused checks.
 
 ## Evaluation
 
@@ -164,7 +166,7 @@ The six scenarios have hidden causes and expected outcomes. The scorer requires 
 
 Hand-built perfect, lazy, test-edit, and collateral outcomes are checked across scenarios and seeds in the Python suite. The scripted run is labelled **scripted, checks the evaluation plumbing, not agent performance**. Commands and the per-fault contract are in [Evaluation](docs/EVALUATION.md).
 
-The harness supports running real models through a provider interface, including local Ollama models (optional setup above). Broader held-out evaluation across models and seeds is future work.
+The harness supports running real models through an OpenAI-compatible provider, including local Ollama models (optional setup above). The local Ollama path uses its own HTTP adapter. Broader held-out evaluation across models and seeds is future work.
 
 ## Repository tour
 
