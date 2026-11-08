@@ -1,0 +1,11 @@
+.tools
+.venv
+.import_linter_cache
+analytics/runs
+mutants
+node_modules
+.next
+web/.next
+*.tsbuildinfo
+package-lock.json
+uv.lock

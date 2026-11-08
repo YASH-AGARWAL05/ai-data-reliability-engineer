@@ -1,0 +1,18 @@
+[importlinter]
+root_package = ai_data_reliability
+
+[importlinter:contract:investigator-independent-of-evaluation]
+name = Investigator cannot read evaluation ground truth
+type = forbidden
+source_modules =
+    ai_data_reliability.investigator
+forbidden_modules =
+    ai_data_reliability.evaluation
+
+[importlinter:contract:analytics-independent-of-service]
+name = Analytics cannot import service
+type = forbidden
+source_modules =
+    ai_data_reliability.analytics
+forbidden_modules =
+    ai_data_reliability.service

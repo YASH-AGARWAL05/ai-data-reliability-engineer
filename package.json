@@ -1,0 +1,35 @@
+{
+  "name": "ai-data-reliability-engineer",
+  "private": true,
+  "engines": {
+    "node": "^22.13.0 || >=24"
+  },
+  "scripts": {
+    "lint": "eslint web --no-error-on-unmatched-pattern",
+    "format:check": "prettier --check .",
+    "unused": "knip",
+    "test": "vitest run web --passWithNoTests",
+    "e2e": "playwright test",
+    "dev:web": "next dev web --hostname 127.0.0.1",
+    "build:web": "next build web",
+    "typecheck": "next typegen web && tsc --noEmit -p web/tsconfig.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "22.19.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "10.14.0",
+    "knip": "6.44.1",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1",
+    "vite": "8.3.6",
+    "vitest": "5.1.0"
+  },
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}

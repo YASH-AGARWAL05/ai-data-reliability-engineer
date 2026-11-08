@@ -1,0 +1,6 @@
+{
+  "name": "late_refunds",
+  "mutation": "delay_refund_ingestion",
+  "expected_dbt": "pass",
+  "fix_required": false
+}

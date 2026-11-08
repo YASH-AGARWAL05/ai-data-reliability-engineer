@@ -1,0 +1,6 @@
+{
+  "name": "duplicate_payments",
+  "mutation": "duplicate_payment_event",
+  "expected_dbt": "fail_test",
+  "fix_required": true
+}

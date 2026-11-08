@@ -1,0 +1,6 @@
+{
+  "name": "clean",
+  "mutation": "none",
+  "expected_dbt": "pass",
+  "fix_required": false
+}

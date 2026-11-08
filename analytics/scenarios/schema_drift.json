@@ -1,0 +1,6 @@
+{
+  "name": "schema_drift",
+  "mutation": "rename_payment_amount",
+  "expected_dbt": "fail_build",
+  "fix_required": true
+}

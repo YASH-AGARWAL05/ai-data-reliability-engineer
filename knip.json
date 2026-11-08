@@ -1,0 +1,4 @@
+{
+  "entry": ["web/app/**/*.{ts,tsx}", "web/**/*.config.ts"],
+  "project": ["web/**/*.{ts,tsx}"]
+}

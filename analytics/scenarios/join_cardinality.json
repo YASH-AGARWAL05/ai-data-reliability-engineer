@@ -1,0 +1,6 @@
+{
+  "name": "join_cardinality",
+  "mutation": "multiply_payment_join",
+  "expected_dbt": "fail_test",
+  "fix_required": true
+}

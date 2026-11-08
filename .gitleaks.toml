@@ -1,0 +1,12 @@
+title = "AI Data Reliability Engineer"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated mypy cache, not repository source"
+paths = ['''(^|/)\.mypy_cache/''']
+
+[[allowlists]]
+description = "Generated Next build cache, not repository source"
+paths = ['''(^|/)\.next/''']

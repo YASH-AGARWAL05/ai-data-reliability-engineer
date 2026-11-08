@@ -1,0 +1,12 @@
+.git
+.tools
+.venv
+.next
+node_modules
+analytics/runs
+runtime
+tests
+docs
+*.duckdb
+*.pyc
+__pycache__

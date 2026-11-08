@@ -1,0 +1,6 @@
+{
+  "name": "missing_currency_conversion",
+  "mutation": "omit_fx_conversion",
+  "expected_dbt": "fail_test",
+  "fix_required": true
+}
