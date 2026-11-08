@@ -1,0 +1,13 @@
+AI Data Reliability Engineer
+
+This repository includes and adapts material from dbt Labs' jaffle_shop_duckdb
+project (https://github.com/dbt-labs/jaffle_shop_duckdb), recorded at commit
+20cc904370818ceab08cf19f8fd196e9e81def88. The reused material is in
+analytics/template/, including the original customer, order, and payment seeds
+and the customer transformation. The fixture has been extended with additional
+models, tests, data columns, and fault scenarios for this project.
+
+The upstream project is licensed under Apache License 2.0. Its license text is
+preserved at analytics/template/UPSTREAM_LICENSE. The top-level LICENSE applies
+to this repository's code and documentation. This project is independent of and
+not endorsed by dbt Labs.
