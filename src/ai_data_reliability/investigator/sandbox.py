@@ -369,6 +369,8 @@ class InvestigatorTools:
             "--pull=never",
             "--name",
             name,
+            "--user",
+            f"{os.getuid()}:{os.getgid()}",
             "--network",
             "none",
             "--read-only",

@@ -1,6 +1,7 @@
 """Fast boundary tests used by mutation testing without starting Docker."""
 
 import json
+import os
 import subprocess
 from decimal import Decimal
 from pathlib import Path
@@ -203,6 +204,7 @@ def test_container_mounts_are_separated(tmp_path: Path, monkeypatch: pytest.Monk
     monkeypatch.setattr(subprocess, "run", fake_run)
     assert tools._container(identifier, "query", stdin="select 1") == {"ok": True}
     query = commands[-1]
+    assert query[query.index("--user") + 1] == f"{os.getuid()}:{os.getgid()}"
     assert query[query.index("--network") + 1] == "none"
     assert "--read-only" in query
     assert "--cap-drop" in query and "ALL" in query
